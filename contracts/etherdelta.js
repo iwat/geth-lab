@@ -1,4 +1,4 @@
-this.lab.contracts["etherdelta_abi"] = [
+lab.contract.abis["etherdelta"] = [
   {
     "constant": false,
     "inputs": [
