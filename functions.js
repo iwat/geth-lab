@@ -16,3 +16,39 @@ this.lab.myBalances = function() {
     }
   }
 }
+
+this.lab.relatedTransactions = function(account, endBlockNumber, numBlocks) {
+  if (endBlockNumber == null) {
+    endBlockNumber = eth.blockNumber;
+  }
+
+  if (numBlocks == null) {
+    numBlocks = 100
+  }
+
+  var startBlockNumber = endBlockNumber - numBlocks;
+
+  for (var i = startBlockNumber; i <= endBlockNumber; i++) {
+    var block = eth.getBlock(i, true);
+    if (block == null || block.transactions == null) {
+      continue
+    }
+
+    block.transactions.forEach( function(e) {
+      if (account == "*" || account == e.from || account == e.to) {
+        console.log("  tx hash          : " + e.hash + "\n"
+          + "   nonce           : " + e.nonce + "\n"
+          + "   blockHash       : " + e.blockHash + "\n"
+          + "   blockNumber     : " + e.blockNumber + "\n"
+          + "   transactionIndex: " + e.transactionIndex + "\n"
+          + "   from            : " + e.from + "\n"
+          + "   to              : " + e.to + "\n"
+          + "   value           : " + e.value + "\n"
+          + "   time            : " + block.timestamp + " " + new Date(block.timestamp * 1000).toGMTString() + "\n"
+          + "   gasPrice        : " + e.gasPrice + "\n"
+          + "   gas             : " + e.gas + "\n"
+          + "   input           : " + e.input);
+      }
+    })
+  }
+}
