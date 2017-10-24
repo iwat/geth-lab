@@ -4,7 +4,7 @@ this.ico.gasLimit = 250000
 this.ico.senders = {
   wat:      10,
   vorakorn: 10,
-  pranorm:   5,
+  pranorm:  10,
 }
 this.ico.gasPrice = 60
 this.ico.signed = {}
