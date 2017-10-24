@@ -26,6 +26,28 @@ this.lab.watchBlock = function() {
   })
 }
 
+this.lab.transferAll = function(from, to) {
+  var balance = eth.getBalance(from)
+  var gasPrice = web3.toWei(4, "gwei")
+  var gasLimit = 21000
+
+  tx = eth.signTransaction({
+    from:     from,
+    to:       to,
+    value:    balance - gasPrice*gasLimit,
+    gas:      gasLimit,
+    gasPrice: gasPrice,
+  })
+  inspect(tx)
+  this.etherScanLink(tx)
+  eth.sendRawTransaction(tx.raw)
+}
+
+this.lab.etherScanLink = function(tx) {
+  var base = "https://api.etherscan.io/api?module=proxy&action=eth_sendRawTransaction&hex="
+  console.log(base + tx.raw + "&apikey=" + etherscan.apikey)
+}
+
 this.lab.relatedTransactions = function(account, endBlockNumber, numBlocks) {
   if (endBlockNumber == null) {
     endBlockNumber = eth.blockNumber;
