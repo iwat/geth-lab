@@ -17,6 +17,15 @@ this.lab.myBalances = function() {
   }
 }
 
+this.lab.watchBlock = function() {
+  var filter = web3.eth.filter("latest")
+
+  filter.watch(function(error, result) {
+    var block = web3.eth.getBlock(result)
+    console.log("Current block #" + block.number + " at " + (new Date(block.timestamp * 1000)))
+  })
+}
+
 this.lab.relatedTransactions = function(account, endBlockNumber, numBlocks) {
   if (endBlockNumber == null) {
     endBlockNumber = eth.blockNumber;
