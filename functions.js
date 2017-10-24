@@ -49,6 +49,7 @@ this.lab.etherScanLink = function(tx) {
 }
 
 this.lab.relatedTransactions = function(account, endBlockNumber, numBlocks) {
+  account = account.toLowerCase()
   if (endBlockNumber == null) {
     endBlockNumber = eth.blockNumber;
   }
@@ -65,20 +66,9 @@ this.lab.relatedTransactions = function(account, endBlockNumber, numBlocks) {
       continue
     }
 
-    block.transactions.forEach( function(e) {
+    block.transactions.forEach(function(e) {
       if (account == "*" || account == e.from || account == e.to) {
-        console.log("  tx hash          : " + e.hash + "\n"
-          + "   nonce           : " + e.nonce + "\n"
-          + "   blockHash       : " + e.blockHash + "\n"
-          + "   blockNumber     : " + e.blockNumber + "\n"
-          + "   transactionIndex: " + e.transactionIndex + "\n"
-          + "   from            : " + e.from + "\n"
-          + "   to              : " + e.to + "\n"
-          + "   value           : " + e.value + "\n"
-          + "   time            : " + block.timestamp + " " + new Date(block.timestamp * 1000).toGMTString() + "\n"
-          + "   gasPrice        : " + e.gasPrice + "\n"
-          + "   gas             : " + e.gas + "\n"
-          + "   input           : " + e.input);
+        inspect(e)
       }
     })
   }
