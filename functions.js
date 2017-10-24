@@ -22,7 +22,7 @@ this.lab.watchBlock = function() {
 
   filter.watch(function(error, result) {
     var block = web3.eth.getBlock(result)
-    console.log("Current block #" + block.number + " at " + (new Date(block.timestamp * 1000)))
+    console.log("Block #" + block.number + " at " + (new Date(block.timestamp * 1000)) + " gas " + block.gasUsed + " price " + web3.fromWei(eth.gasPrice, "gwei") + " gwei")
   })
 }
 
