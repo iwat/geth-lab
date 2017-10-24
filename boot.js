@@ -1,8 +1,10 @@
 lab = {}
 
 loadScript("accounts.js")
+loadScript("boot.local.js")
 loadScript("contract.js")
 loadScript("functions.js")
+loadScript("ico.js")
 loadScript("polyfill.js")
 loadScript("token.js")
 
