@@ -26,21 +26,25 @@ this.lab.watchBlock = function() {
   })
 }
 
+this.lab.transfer = function(params) {
+  tx = eth.signTransaction(params)
+  inspect(tx)
+  this.etherScanLink(tx)
+  //eth.sendRawTransaction(tx.raw)
+}
+
 this.lab.transferAll = function(from, to) {
   var balance = eth.getBalance(from)
   var gasPrice = web3.toWei(4, "gwei")
   var gasLimit = 21000
 
-  tx = eth.signTransaction({
+  this.transfer({
     from:     from,
     to:       to,
     value:    balance - gasPrice*gasLimit,
     gas:      gasLimit,
     gasPrice: gasPrice,
   })
-  inspect(tx)
-  this.etherScanLink(tx)
-  eth.sendRawTransaction(tx.raw)
 }
 
 this.lab.etherScanLink = function(tx) {

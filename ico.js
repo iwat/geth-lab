@@ -1,12 +1,13 @@
 this.ico = {}
-this.ico.contract = "0x97208Bf5dC25e6FD4719cfc2A3C1D1A59a974c3b"
+this.ico.contract = "0xc88c7e1AEbd89187d13bD42e1ff814d32f492BF6"
 this.ico.gasLimit = 250000
 this.ico.senders = {
-  wat:      10,
-  vorakorn: 10,
-  pranorm:  10,
+  wat:       5,
+  oom:       5,
+  //vorakorn: 10,
+  pranorm:   5,
 }
-this.ico.gasPrice = 60
+this.ico.gasPrice = 50
 this.ico.signed = {}
 
 this.ico.unlock = function() {
