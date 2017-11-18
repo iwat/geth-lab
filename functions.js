@@ -10,13 +10,18 @@ this.lab.dumpBalances = function(name, account) {
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
       if (this[token] == undefined) { return }
+      if (this["ed_" + token] == undefined) { return }
       if (this.ether == undefined) { return }
     }
 
     console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.ether) + " ETH")
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
-      console.log("           has " + web3.fromWei(this[token]) + " " + lab.token[token].symbol())
+      console.log("           has "
+        + web3.fromWei(this[token]) + " "
+        + "+ " + web3.fromWei(this["ed_" + token]) + " "
+        + lab.token[token].symbol()
+      )
     }
   }
 
@@ -29,6 +34,11 @@ this.lab.dumpBalances = function(name, account) {
     if (typeof lab.token[token] == "function") { continue }
     lab.token[token].balanceOf(account, function(error, balance) {
       tokens[token] = balance
+      tokens.check()
+    })
+
+    lab.contract.etherdelta.balanceOf(lab.token[token].address, account, function(error, balance) {
+      tokens["ed_" + token] = balance
       tokens.check()
     })
   }
