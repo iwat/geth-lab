@@ -14,12 +14,12 @@ this.lab.dumpBalances = function(name, account) {
       if (this.ether == undefined) { return }
     }
 
-    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.ether) + " ETH")
+    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.ether).toFixed(18) + " ETH")
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
       console.log("           has "
-        + web3.fromWei(this[token]) + " "
-        + "+ " + web3.fromWei(this["ed_" + token]) + " "
+        + web3.fromWei(this[token]).toFixed(18) + " "
+        + "+ " + web3.fromWei(this["ed_" + token]).toFixed(18) + " "
         + lab.token[token].symbol()
       )
     }
