@@ -12,9 +12,15 @@ this.lab.dumpBalances = function(name, account) {
       if (this[token] == undefined) { return }
       if (this["ed_" + token] == undefined) { return }
       if (this.ether == undefined) { return }
+      if (this.ed_ether == undefined) { return }
     }
 
-    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.ether).toFixed(18) + " ETH")
+    console.log(name.padEnd(10) + " has "
+      + web3.fromWei(this.ether).toFixed(18) + " "
+      + "+ " + web3.fromWei(this.ed_ether).toFixed(18) + " "
+      + "ETH"
+    )
+
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
       console.log("           has "
@@ -27,6 +33,11 @@ this.lab.dumpBalances = function(name, account) {
 
   eth.getBalance(account, function(error, balance) {
     tokens["ether"] = balance
+    tokens.check()
+  })
+
+  lab.contract.etherdelta.balanceOf("0", account, function(error, balance) {
+    tokens["ed_ether"] = balance
     tokens.check()
   })
 
