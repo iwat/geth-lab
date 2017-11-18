@@ -1,19 +1,36 @@
 this.lab.myBalances = function() {
   for (var name in this.accounts) {
-    var account = this.accounts[name]
-    var balance = eth.getBalance(account)
-    console.log(name.padEnd(10) + " has " + web3.fromWei(balance) + " ETH")
+    this.dumpBalances(name, this.accounts[name])
+  }
+}
 
+this.lab.dumpBalances = function(name, account) {
+  var tokens = {}
+  tokens.check = function() {
     for (var token in lab.token) {
-      if (token == "load") {
-        continue
-      }
-      var balance = lab.token[token].balanceOf(account)
-      if (balance == 0) {
-        continue
-      }
-      console.log("           has " + web3.fromWei(balance) + " " + lab.token[token].symbol())
+      if (typeof lab.token[token] == "function") { continue }
+      if (this[token] == undefined) { return }
+      if (this.eth == undefined) { return }
     }
+
+    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.eth) + " ETH")
+    for (var token in lab.token) {
+      if (typeof lab.token[token] == "function") { continue }
+      console.log("           has " + web3.fromWei(this[token]) + " " + lab.token[token].symbol())
+    }
+  }
+
+  eth.getBalance(account, function(error, balance) {
+    tokens["eth"] = balance
+    tokens.check()
+  })
+
+  for (var token in lab.token) {
+    if (typeof lab.token[token] == "function") { continue }
+    lab.token[token].balanceOf(account, function(error, balance) {
+      tokens[token] = balance
+      tokens.check()
+    })
   }
 }
 
