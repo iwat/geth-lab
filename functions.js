@@ -10,10 +10,10 @@ this.lab.dumpBalances = function(name, account) {
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
       if (this[token] == undefined) { return }
-      if (this.eth == undefined) { return }
+      if (this.ether == undefined) { return }
     }
 
-    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.eth) + " ETH")
+    console.log(name.padEnd(10) + " has " + web3.fromWei(tokens.ether) + " ETH")
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
       console.log("           has " + web3.fromWei(this[token]) + " " + lab.token[token].symbol())
@@ -21,7 +21,7 @@ this.lab.dumpBalances = function(name, account) {
   }
 
   eth.getBalance(account, function(error, balance) {
-    tokens["eth"] = balance
+    tokens["ether"] = balance
     tokens.check()
   })
 
