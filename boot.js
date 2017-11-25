@@ -9,6 +9,7 @@ loadScript("polyfill.js")
 loadScript("token.js")
 
 lab.contract.load("etherdelta", "0x8d12a197cb00d4747a1fe03395095ce2a5cc6819")
+lab.contract.load("weth", "0x2956356cd2a2bf3202f771f50d3d14a367b48070")
 
 lab.token.load("arn", "0xba5f11b16b155792cf3b2e6880e8706859a8aeb6")
 lab.token.load("eth", "0x2956356cD2a2bf3202F771F50D3D14A367b48070")
