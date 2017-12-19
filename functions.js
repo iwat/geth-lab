@@ -65,10 +65,9 @@ this.lab.watchBlock = function() {
 }
 
 this.lab.transfer = function(params) {
-  tx = eth.signTransaction(params)
+  var tx = eth.signTransaction(params)
   inspect(tx)
   this.etherScanLink(tx)
-  //eth.sendRawTransaction(tx.raw)
 }
 
 this.lab.transferAll = function(from, to) {
