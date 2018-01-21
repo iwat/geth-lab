@@ -64,24 +64,33 @@ this.lab.watchBlock = function() {
   })
 }
 
-this.lab.transfer = function(params) {
+this.lab.signTransaction = function(params) {
   var tx = eth.signTransaction(params)
   inspect(tx)
   this.etherScanLink(tx)
 }
 
-this.lab.transferAll = function(from, to) {
-  var balance = eth.getBalance(from)
+this.lab.transferAll = function(from, to, more) {
+  var balance = 0
+  if (more != undefined && more.balance != undefined) {
+    balance = more.balance
+  } else {
+    balance = eth.getBalance(from)
+  }
   var gasPrice = web3.toWei(4, "gwei")
   var gasLimit = 21000
 
-  this.transfer({
+  params = {
     from:     from,
     to:       to,
     value:    balance - gasPrice*gasLimit,
     gas:      gasLimit,
     gasPrice: gasPrice,
-  })
+  }
+  if (more != undefined) {
+    params = Object.assign(params, more)
+  }
+  this.signTransaction(params)
 }
 
 this.lab.etherScanLink = function(tx) {
