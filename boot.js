@@ -12,6 +12,7 @@ lab.contract.load("etherdelta", "0x8d12a197cb00d4747a1fe03395095ce2a5cc6819")
 lab.contract.load("weth", "0x2956356cd2a2bf3202f771f50d3d14a367b48070")
 
 lab.token.load("arn", "0xba5f11b16b155792cf3b2e6880e8706859a8aeb6")
+lab.token.load("agi", "0x8eb24319393716668d768dcec29356ae9cffe285")
 lab.token.load("eth", "0x2956356cD2a2bf3202F771F50D3D14A367b48070")
 lab.token.load("knc", "0xdd974D5C2e2928deA5F71b9825b8b646686BD200")
 lab.token.load("mod", "0x957c30aB0426e0C93CD8241E2c60392d08c6aC8e")
