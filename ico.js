@@ -2,12 +2,10 @@ this.ico = {}
 this.ico.contract = "0x9bbb9387C9E2477A6b5D81AfeCe00255875c48Ce"
 this.ico.gasLimit = 100000
 this.ico.senders = {
-  wat:       5,
-  //oom:       5,
-  //vorakorn: 10,
-  pranorm:   2.5,
+  wat_trezor: { value: 1, nonce: 1 },
+  oom_trezor: { value: 1, nonce: 0 },
 }
-this.ico.gasPrice = 5
+this.ico.gasPrice = 40
 this.ico.signed = {}
 
 this.ico.unlock = function() {
@@ -21,7 +19,7 @@ this.ico.unlock = function() {
 
 this.ico.sign = function() {
   for (var name in this.senders) {
-    this.signOne(name, lab.accounts[name], this.senders[name])
+    this.signOne(name, lab.accounts[name], this.senders[name].value, this.senders[name].nonce)
   }
 
   for (var name in this.senders) {
@@ -30,6 +28,7 @@ this.ico.sign = function() {
     console.log("  gasLimit: " + parseInt(this.signed[name].tx.gas))
     console.log("  gasPrice: " + web3.fromWei(this.signed[name].tx.gasPrice, "gwei") + " gwei")
     console.log("  value:    " + web3.fromWei(this.signed[name].tx.value) + " ETH")
+    console.log("  nonce:    " + this.signed[name].tx.nonce)
   }
 
   for (var name in this.senders) {
@@ -37,14 +36,18 @@ this.ico.sign = function() {
   }
 }
 
-this.ico.signOne = function(name, from, value) {
-  this.signed[name] = eth.signTransaction({
+this.ico.signOne = function(name, from, value, nonce) {
+  var params = {
     from:     from,
     to:       this.contract,
     value:    web3.toWei(value),
     gas:      this.gasLimit,
     gasPrice: web3.toWei(this.gasPrice, "gwei")
-  })
+  }
+  if (nonce >= 0) {
+    params.nonce = nonce
+  }
+  this.signed[name] = eth.signTransaction(params)
 }
 
 this.ico.send = function() {
