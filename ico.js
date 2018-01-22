@@ -1,6 +1,6 @@
 this.ico = {}
-this.ico.contract = "0xc88c7e1AEbd89187d13bD42e1ff814d32f492BF6"
-this.ico.gasLimit = 180000
+this.ico.contract = "0x9bbb9387C9E2477A6b5D81AfeCe00255875c48Ce"
+this.ico.gasLimit = 100000
 this.ico.senders = {
   wat:       5,
   //oom:       5,

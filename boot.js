@@ -7,6 +7,7 @@ loadScript("functions.js")
 loadScript("ico.js")
 loadScript("polyfill.js")
 loadScript("token.js")
+loadScript("trezor.js")
 
 lab.contract.load("etherdelta", "0x8d12a197cb00d4747a1fe03395095ce2a5cc6819")
 lab.contract.load("weth", "0x2956356cd2a2bf3202f771f50d3d14a367b48070")
