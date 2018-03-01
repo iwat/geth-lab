@@ -1,10 +1,11 @@
 this.ico = {}
-this.ico.contract = "0x01bbec6573ed7EcA0f307a10d2B4CEB669816B4a"
-this.ico.gasLimit = 200000
+this.ico.contract = "0x9bbb9387c9e2477a6b5d81afece00255875c48ce"
+this.ico.gasLimit = 100000
 this.ico.senders = {
-  wat_trezor: { value: 1, nonce: 11 },
+  wat_trezor: { value: 0, nonce: 13 },
+  oom_trezor: { value: 0, nonce: 8 },
 }
-this.ico.gasPrice = 50
+this.ico.gasPrice = 5
 this.ico.signed = {}
 
 this.ico.unlock = function() {

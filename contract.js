@@ -11,6 +11,9 @@ lab.contract = {
         this[name][f].signTransaction = function() {
           var params = arguments[arguments.length-1]
           params.data = this.getData.apply(null, Array.prototype.slice.call(arguments, 0, arguments.length))
+          if (params.nonce == null) {
+            params.nonce = eth.getTransactionCount(params.from)
+          }
           var tx = eth.signTransaction(params)
           inspect(tx)
           lab.etherScanLink(tx)
