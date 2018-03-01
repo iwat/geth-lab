@@ -1,10 +1,10 @@
 this.lab.myBalances = function() {
   for (var name in this.accounts) {
-    this.dumpBalances(name, this.accounts[name])
+    this.dumpBalances(this.accounts[name], name)
   }
 }
 
-this.lab.dumpBalances = function(name, account) {
+this.lab.dumpBalances = function(account, name) {
   var tokens = {}
   tokens.check = function() {
     for (var token in lab.token) {
@@ -15,16 +15,22 @@ this.lab.dumpBalances = function(name, account) {
       if (this.ed_ether == undefined) { return }
     }
 
-    console.log(name.padEnd(10) + " has "
-      + web3.fromWei(this.ether).toFixed(18) + " "
+    var line = ""
+    if (typeof(name) != "undefined") {
+      line = name.padEnd(10) + " has "
+    }
+    console.log(line + web3.fromWei(this.ether).toFixed(18) + " "
       + "+ " + web3.fromWei(this.ed_ether).toFixed(18) + " "
       + "ETH"
     )
 
     for (var token in lab.token) {
       if (typeof lab.token[token] == "function") { continue }
-      console.log("           has "
-        + web3.fromWei(this[token]).toFixed(18) + " "
+      line = ""
+      if (typeof(name) != "undefined") {
+        line = "           has "
+      }
+      console.log(line + web3.fromWei(this[token]).toFixed(18) + " "
         + "+ " + web3.fromWei(this["ed_" + token]).toFixed(18) + " "
         + lab.token[token].symbol()
       )
