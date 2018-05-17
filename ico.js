@@ -1,11 +1,11 @@
 this.ico = {}
-this.ico.contract = "0x9bbb9387c9e2477a6b5d81afece00255875c48ce"
-this.ico.gasLimit = 100000
+this.ico.contract = "0xf00fcd9119f93a1069054e4280970a75614ad7c9"
+this.ico.gasLimit = 200000
 this.ico.senders = {
-  wat_trezor: { value: 0, nonce: 13 },
-  oom_trezor: { value: 0, nonce: 8 },
+  wat: { value: 5, nonce: 236 },
+  oom: { value: 5, nonce: 35 },
 }
-this.ico.gasPrice = 5
+this.ico.gasPrice = 100
 this.ico.signed = {}
 
 this.ico.unlock = function() {
@@ -13,7 +13,9 @@ this.ico.unlock = function() {
     var sender = lab.accounts[name]
     console.info("Unlock account " + name)
     personal.unlockAccount(sender, null, 3600)
-    console.log(web3.fromWei(eth.getBalance(sender)) + " ETH")
+    if (arguments.length > 0 && arguments[0]) {
+      console.log(web3.fromWei(eth.getBalance(sender)) + " ETH")
+    }
   }
 }
 
@@ -54,6 +56,6 @@ this.ico.send = function() {
   for (var name in this.signed) {
     var tx = this.signed[name]
     console.log("Sending for " + name + " " + tx.tx.hash)
-    //eth.sendRawTransaction(tx.raw, function(result) { inspect(result) })
+    eth.sendRawTransaction(tx.raw, function(result) { inspect(result) })
   }
 }
